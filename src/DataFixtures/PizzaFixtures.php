@@ -14,7 +14,7 @@ class PizzaFixtures extends Fixture
             [
                 'name' => 'Margherita',
                 'description' => 'Tomate, mozzarella, basilic frais',
-                'price' => 10.99,
+                'prix' => 10.99,
                 'image' => 'images/pizzas/margherita.jpg',
             ],
             [

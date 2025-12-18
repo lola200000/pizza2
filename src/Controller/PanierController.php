@@ -1,0 +1,41 @@
+<?php
+
+namespace App\Controller;
+
+use App\Service\PanierService;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Attribute\Route;
+
+class PanierController extends AbstractController
+{
+    #[Route('/panier', name: 'panier_index')]
+    public function index(PanierService $panierService): Response
+    {
+        return $this->render('panier/index.html.twig', [
+            'items' => $panierService->getFullPanier(),
+            'total' => $panierService->getTotal(),
+        ]);
+    }
+
+    #[Route('/panier/add/{id}', name: 'panier_add')]
+    public function add(int $id, PanierService $panierService): Response
+    {
+        $panierService->add($id);
+        return $this->redirectToRoute('panier_index');
+    }
+
+    #[Route('/panier/decrease/{id}', name: 'panier_decrease')]
+    public function decrease(int $id, PanierService $panierService): Response
+    {
+        $panierService->decrease($id);
+        return $this->redirectToRoute('panier_index');
+    }
+
+    #[Route('/panier/remove/{id}', name: 'panier_remove')]
+    public function remove(int $id, PanierService $panierService): Response
+    {
+        $panierService->remove($id);
+        return $this->redirectToRoute('panier_index');
+    }
+}
