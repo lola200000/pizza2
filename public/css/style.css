@@ -1,0 +1,46 @@
+.app-header {
+    background: #c62828;
+    color: white;
+    padding: 12px 30px;
+}
+
+.header-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    font-size: 20px;
+    font-weight: bold;
+    gap: 8px;
+}
+
+.main-nav a {
+    color: white;
+    margin: 0 15px;
+    text-decoration: none;
+}
+
+.user-actions {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.cart {
+    position: relative;
+}
+
+.badge {
+    position: absolute;
+    top: -6px;
+    right: -10px;
+    background: yellow;
+    color: black;
+    font-size: 12px;
+    padding: 2px 6px;
+    border-radius: 50%;
+}

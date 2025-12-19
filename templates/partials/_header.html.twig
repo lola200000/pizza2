@@ -1,0 +1,46 @@
+<header class="app-header">
+    <div class="header-container">
+
+        <!-- Logo -->
+        <div class="logo">
+            <i class="fa-solid fa-pizza-slice"></i>
+            <span>Pizza Express</span>
+        </div>
+
+        <!-- Navigation -->
+        <nav class="main-nav">
+            <a href="{{ path('app_home') }}">Menu</a>
+            <a href="#">Promotions</a>
+            <a href="#">À propos</a>
+        </nav>
+
+        <!-- User actions -->
+        <div class="user-actions">
+
+            <!-- Panier -->
+            <a href="{{ path('cart_index') }}" class="cart">
+                <i class="fa-solid fa-cart-shopping"></i>
+                <span class="badge">2</span>
+            </a>
+
+            <!-- Profil -->
+            {% if app.user %}
+                <div class="profile">
+                    <i class="fa-solid fa-user"></i>
+                    {{ app.user.email }}
+                </div>
+            {% else %}
+                <a href="{{ path('app_login') }}">
+                    <i class="fa-solid fa-user"></i> Connexion
+                </a>
+            {% endif %}
+
+            <!-- Settings -->
+            <a href="{{ path('app_settings') }}">
+                <i class="fa-solid fa-gear"></i>
+            </a>
+
+        </div>
+
+    </div>
+</header>
