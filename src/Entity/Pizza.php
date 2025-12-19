@@ -21,7 +21,7 @@ class Pizza
     private ?string $description = null;
 
     #[ORM\Column]
-    private ?float $price = null;
+    private ?float $prix = null;
 
     #[ORM\Column(length: 255)]
     private ?string $image = null;
@@ -55,17 +55,18 @@ class Pizza
         return $this;
     }
 
-    public function getPrice(): ?float
-    {
-        return $this->getPrice;
-    }
 
-    public function setPrice(float $price): static
+    public function setPrix(float $prix): static
     {
-        $this->price = $price;
+        $this->prix = $prix;
 
         return $this;
     }
+    public function getPrix(): ?float
+{
+    return $this->prix;
+}
+
 
     public function getImage(): ?string
     {

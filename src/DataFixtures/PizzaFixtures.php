@@ -15,37 +15,37 @@ class PizzaFixtures extends Fixture
                 'name' => 'Margherita',
                 'description' => 'Tomate, mozzarella, basilic frais',
                 'prix' => 10.99,
-                'image' => 'images/pizzas/margherita.jpg',
+                'image' => 'images/pizzas/Margherita.jpg',
             ],
             [
                 'name' => 'Pepperoni',
                 'description' => 'Tomate, mozzarella, pepperoni épicé',
-                'price' => 12.99,
-                'image' => 'images/pizzas/pepperoni.jpg',
+                'prix' => 12.99,
+                'image' => 'images/pizzas/Pepperoni.jpg',
             ],
             [
                 'name' => 'Végétarienne',
                 'description' => 'Tomate, mozzarella, légumes frais',
-                'price' => 11.99,
-                'image' => 'images/pizzas/vegetarienne.jpg',
+                'prix' => 11.99,
+                'image' => 'images/pizzas/Vegetarienne.jpg',
             ],
             [
                 'name' => 'Quattro Formaggi',
                 'description' => 'Mozzarella, gorgonzola, parmesan, chèvre',
-                'price' => 13.99,
-                'image' => 'images/pizzas/quattro-formaggi.jpg',
+                'prix' => 13.99,
+                'image' => 'images/pizzas/Quattro-formaggi.jpg',
             ],
             [
                 'name' => 'Hawaïenne',
                 'description' => 'Tomate, mozzarella, jambon, ananas',
-                'price' => 12.49,
-                'image' => 'images/pizzas/hawaiienne.jpg',
+                'prix' => 12.49,
+                'image' => 'images/pizzas/Hawaiienne.jpg',
             ],
             [
                 'name' => 'Calzone',
                 'description' => 'Pizza pliée garnie de jambon et ricotta',
-                'price' => 13.49,
-                'image' => 'images/pizzas/calzone.jpg',
+                'prix' => 13.49,
+                'image' => 'images/pizzas/Calzone.jpg',
             ],
         ];
 
@@ -53,7 +53,7 @@ class PizzaFixtures extends Fixture
             $pizza = new Pizza();
             $pizza->setName($data['name']);
             $pizza->setDescription($data['description']);
-            $pizza->setPrice($data['price']);
+            $pizza->setPrix($data['prix']);
             $pizza->setImage($data['image']);
 
             $manager->persist($pizza);

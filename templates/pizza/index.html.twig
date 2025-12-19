@@ -15,14 +15,17 @@
         {% for pizza in pizzas %}
             <div class="col-md-4 mb-4">
                 <div class="card h-100 shadow">
-                    <img src="{{ pizza.image }}" class="card-img-top" alt="">
+                    <img src="{{ asset(pizza.image) }}" class="card-img-top" alt="">
                     <div class="card-body">
                         <h5 class="card-title">{{ pizza.name }}</h5>
                         <p class="card-text">{{ pizza.description }}</p>
                     </div>
                     <div class="card-footer d-flex justify-content-between align-items-center">
-                        <strong>{{ pizza.price }} €</strong>
-                        <a href="#" class="btn btn-danger">+ Ajouter</a>
+                        <strong>{{ pizza.prix }} €</strong>
+                       <a href="{{ path('panier_add', {id: pizza.id}) }}" class="btn btn-danger">
+    + Ajouter
+</a>
+
                     </div>
                 </div>
             </div>
