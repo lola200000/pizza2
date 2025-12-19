@@ -1,33 +1,57 @@
 {% extends 'base.html.twig' %}
 
+{% block title %}Mon Panier{% endblock %}
+
 {% block body %}
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Mon Panier</h2>
 
-
-
-<div class="container">
-    <h2 class="text-center mb-4">Notre Menu</h2>
-
-    <div class="row">
-        {% for pizza in pizzas %}
-            <div class="col-md-4 mb-4">
-                <div class="card h-100 shadow">
-                    <img src="{{ asset(pizza.image) }}" class="card-img-top" alt="">
-                    <div class="card-body">
-                        <h5 class="card-title">{{ pizza.name }}</h5>
-                        <p class="card-text">{{ pizza.description }}</p>
-                    </div>
-                    <div class="card-footer d-flex justify-content-between align-items-center">
-                        <strong>{{ pizza.prix }} €</strong>
-                       <a href="{{ path('panier_add', {id: pizza.id}) }}" class="btn btn-danger">
-    + Ajouter
-</a>
-
+    {% if items is empty %}
+        <div class="alert alert-info text-center">
+            🛒 Votre panier est vide.
+        </div>
+        <div class="text-center">
+            <a href="{{ path('pizza_menu') }}" class="btn btn-primary">Voir le menu</a>
+        </div>
+    {% else %}
+        <div class="row">
+            {% for item in items %}
+                <div class="col-md-6 mb-3">
+                    <div class="card shadow-sm">
+                        <div class="row g-0 align-items-center">
+                            <div class="col-4">
+                                <img src="{{ asset(item.product.image) }}" class="img-fluid rounded-start" alt="{{ item.product.name }}">
+                            </div>
+                            <div class="col-8">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ item.product.name }}</h5>
+                                    <p class="card-text">
+                                        Quantité : <strong>{{ item.quantity }}</strong><br>
+                                        Prix unitaire : <strong>{{ item.product.prix }} €</strong><br>
+                                        Sous‑total : <strong>{{ (item.product.prix * item.quantity) | number_format(2, '.', ',') }} €</strong>
+                                    </p>
+                                    <div class="btn-group">
+                                        <a href="{{ path('panier_add', {id: item.product.id}) }}" class="btn btn-sm btn-success">+</a>
+                                        <a href="{{ path('panier_decrease', {id: item.product.id}) }}" class="btn btn-sm btn-warning">-</a>
+                                        <a href="{{ path('panier_remove', {id: item.product.id}) }}" class="btn btn-sm btn-danger">Supprimer</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-        {% endfor %}
-    </div>
-</div>
+            {% endfor %}
+        </div>
 
+        <div class="text-end my-4">
+            <h4>Total : <strong>{{ total | number_format(2, '.', ',') }} €</strong></h4>
+        </div>
+
+        <div class="d-flex justify-content-between">
+            <a href="{{ path('pizza_menu') }}" class="btn btn-primary">Continuer mes achats</a>
+            <a href="{{ path('order_checkout') }}" class="btn btn-success">Passer à la commande</a>
+        </div>
+    {% endif %}
+</div>
 {% endblock %}
 

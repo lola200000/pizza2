@@ -1,41 +1,60 @@
-<?php
+{% extends 'base.html.twig' %}
 
-namespace App\Controller;
+{% block title %}Mon Panier{% endblock %}
 
-use App\Service\PanierService;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
+{% block body %}
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Mon Panier</h2>
 
-class PanierController extends AbstractController
-{
-    #[Route('/panier', name: 'panier_index')]
-    public function index(PanierService $panierService): Response
-    {
-        return $this->render('panier/index.html.twig', [
-            'items' => $panierService->getFullPanier(),
-            'total' => $panierService->getTotal(),
-        ]);
-    }
+    {% if items is empty %}
+        <div class="alert alert-info text-center">
+            🛒 Votre panier est vide.
+        </div>
+        <div class="text-center">
+            <a href="{{ path('pizza_menu') }}" class="btn btn-primary">Voir le menu</a>
+        </div>
+    {% else %}
+        <div class="row">
+            {% for item in items %}
+                <div class="col-md-6 mb-3">
+                    <div class="card shadow-sm">
+                        <div class="row g-0 align-items-center">
+                            <div class="col-4">
+                                <img src="{{ asset(item.pizza.image ?: 'images/pizzas/default.jpg') }}"
+                                     class="img-fluid rounded-start"
+                                     alt="{{ item.pizza.name }}">
+                            </div>
+                            <div class="col-8">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ item.pizza.name }}</h5>
+                                    <p class="card-text">
+                                        Quantité : <strong>{{ item.quantity }}</strong><br>
+                                        Prix unitaire : <strong>{{ item.pizza.prix }} €</strong><br>
+                                        Sous‑total : <strong>{{ item.total | number_format(2, '.', ',') }} €</strong>
+                                    </p>
+                                    <div class="btn-group">
+                                        <a href="{{ path('panier_add', {id: item.pizza.id}) }}" class="btn btn-sm btn-success">+</a>
+                                        <a href="{{ path('panier_decrease', {id: item.pizza.id}) }}" class="btn btn-sm btn-warning">-</a>
+                                        <a href="{{ path('panier_remove', {id: item.pizza.id}) }}" class="btn btn-sm btn-danger">Supprimer</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
 
-    #[Route('/panier/add/{id}', name: 'panier_add')]
-    public function add(int $id, PanierService $panierService): Response
-    {
-        $panierService->add($id);
-        return $this->redirectToRoute('panier_index');
-    }
+        <div class="text-end my-4">
+            <h4>Total : <strong>{{ total | number_format(2, '.', ',') }} €</strong></h4>
+        </div>
 
-    #[Route('/panier/decrease/{id}', name: 'panier_decrease')]
-    public function decrease(int $id, PanierService $panierService): Response
-    {
-        $panierService->decrease($id);
-        return $this->redirectToRoute('panier_index');
-    }
+        <div class="d-flex justify-content-between">
+            <a href="{{ path('pizza_index') }}" class="btn btn-primary">Continuer mes achats</a>
+            <a href="{{ path('order_checkout') }}" class="btn btn-success">Passer à la commande</a>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}
 
-    #[Route('/panier/remove/{id}', name: 'panier_remove')]
-    public function remove(int $id, PanierService $panierService): Response
-    {
-        $panierService->remove($id);
-        return $this->redirectToRoute('panier_index');
-    }
-}
+

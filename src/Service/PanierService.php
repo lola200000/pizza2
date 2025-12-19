@@ -5,15 +5,16 @@ namespace App\Service;
 use App\Repository\PizzaRepository;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
-use Symfony\Component\HttpFoundation\Response;
 
 class PanierService
 {
     private SessionInterface $session;
     private PizzaRepository $pizzaRepository;
 
-    public function __construct(RequestStack $requestStack, PizzaRepository $pizzaRepository)
-    {
+    public function __construct(
+        RequestStack $requestStack,
+        PizzaRepository $pizzaRepository
+    ) {
         $this->session = $requestStack->getSession();
         $this->pizzaRepository = $pizzaRepository;
     }
@@ -21,9 +22,7 @@ class PanierService
     public function add(int $id): void
     {
         $panier = $this->session->get('panier', []);
-
         $panier[$id] = ($panier[$id] ?? 0) + 1;
-
         $this->session->set('panier', $panier);
     }
 
@@ -31,9 +30,8 @@ class PanierService
     {
         $panier = $this->session->get('panier', []);
 
-        if (isset($panier[$id])) {
+        if (!empty($panier[$id])) {
             $panier[$id]--;
-
             if ($panier[$id] <= 0) {
                 unset($panier[$id]);
             }
@@ -52,21 +50,21 @@ class PanierService
     public function getFullPanier(): array
     {
         $panier = $this->session->get('panier', []);
-        $data = [];
+        $panierWithData = [];
 
         foreach ($panier as $id => $quantity) {
             $pizza = $this->pizzaRepository->find($id);
 
             if ($pizza) {
-                $data[] = [
+                $panierWithData[] = [
                     'pizza' => $pizza,
                     'quantity' => $quantity,
-                    'total' => $pizza->getPrice() * $quantity,
+                    'total' => $pizza->getPrix() * $quantity,
                 ];
             }
         }
 
-        return $data;
+        return $panierWithData;
     }
 
     public function getTotal(): float

@@ -1,46 +1,94 @@
 .app-header {
-    background: #c62828;
+    background: #c62828; /* насыщенный красный */
     color: white;
-    padding: 12px 30px;
+    padding: 15px 40px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* лёгкая тень */
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    transition: background 0.3s ease;
+}
+
+.app-header:hover {
+    background: #b71c1c; /* чуть темнее при наведении на хедер */
 }
 
 .header-container {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
 .logo {
     display: flex;
     align-items: center;
-    font-size: 20px;
-    font-weight: bold;
-    gap: 8px;
+    font-size: 24px;
+    font-weight: 700;
+    gap: 10px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.logo:hover {
+    transform: scale(1.05);
 }
 
 .main-nav a {
     color: white;
     margin: 0 15px;
     text-decoration: none;
+    font-weight: 500;
+    position: relative;
+    transition: color 0.3s ease;
+}
+
+.main-nav a::after {
+    content: "";
+    display: block;
+    height: 2px;
+    width: 0;
+    background: yellow;
+    transition: width 0.3s;
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+}
+
+.main-nav a:hover {
+    color: #ffeb3b;
+}
+
+.main-nav a:hover::after {
+    width: 100%;
 }
 
 .user-actions {
     display: flex;
     align-items: center;
-    gap: 20px;
+    gap: 25px;
 }
 
 .cart {
     position: relative;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.cart:hover {
+    transform: scale(1.1);
 }
 
 .badge {
     position: absolute;
-    top: -6px;
-    right: -10px;
-    background: yellow;
+    top: -8px;
+    right: -12px;
+    background: #ffeb3b;
     color: black;
     font-size: 12px;
-    padding: 2px 6px;
+    font-weight: bold;
+    padding: 3px 7px;
     border-radius: 50%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
