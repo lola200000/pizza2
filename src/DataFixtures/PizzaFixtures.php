@@ -15,37 +15,38 @@ class PizzaFixtures extends Fixture
                 'name' => 'Margherita',
                 'description' => 'Tomate, mozzarella, basilic frais',
                 'prix' => 10.99,
-                'image' => 'images/pizzas/Margherita.jpg',
+                'image' => 'images/pizzas/margherita.jpg',
             ],
             [
                 'name' => 'Pepperoni',
                 'description' => 'Tomate, mozzarella, pepperoni épicé',
                 'prix' => 12.99,
-                'image' => 'images/pizzas/Pepperoni.jpg',
+                'image' => 'images/pizzas/pepperoni.jpg',
             ],
             [
                 'name' => 'Végétarienne',
                 'description' => 'Tomate, mozzarella, légumes frais',
                 'prix' => 11.99,
-                'image' => 'images/pizzas/Vegetarienne.jpg',
+                'image' => 'images/pizzas/végetarienne.jpg',
+
             ],
             [
                 'name' => 'Quattro Formaggi',
                 'description' => 'Mozzarella, gorgonzola, parmesan, chèvre',
                 'prix' => 13.99,
-                'image' => 'images/pizzas/Quattro-formaggi.jpg',
+                'image' => 'images/pizzas/quattro.jpg',
             ],
             [
                 'name' => 'Hawaïenne',
                 'description' => 'Tomate, mozzarella, jambon, ananas',
                 'prix' => 12.49,
-                'image' => 'images/pizzas/Hawaiienne.jpg',
+                'image' => 'images/pizzas/hawaienne.jpg',
             ],
             [
                 'name' => 'Calzone',
                 'description' => 'Pizza pliée garnie de jambon et ricotta',
                 'prix' => 13.49,
-                'image' => 'images/pizzas/Calzone.jpg',
+                'image' => 'images/pizzas/calzone.jpg',
             ],
         ];
 

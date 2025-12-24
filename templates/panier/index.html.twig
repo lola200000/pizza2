@@ -1,60 +1,45 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Mon Panier{% endblock %}
+{% block title %}Votre Panier{% endblock %}
 
 {% block body %}
-<div class="container mt-5">
-    <h2 class="text-center mb-4">Mon Panier</h2>
+<div class="menu-container">
+    <h1 class="menu-title">Votre Panier</h1>
+    <a href="{{ path('pizza_index') }}" class="back-link">← Continuer mes achats</a>
 
-    {% if items is empty %}
-        <div class="alert alert-info text-center">
-            🛒 Votre panier est vide.
-        </div>
-        <div class="text-center">
-            <a href="{{ path('pizza_menu') }}" class="btn btn-primary">Voir le menu</a>
-        </div>
-    {% else %}
-        <div class="row">
-            {% for item in items %}
-                <div class="col-md-6 mb-3">
-                    <div class="card shadow-sm">
-                        <div class="row g-0 align-items-center">
-                            <div class="col-4">
-                                <img src="{{ asset(item.pizza.image ?: 'images/pizzas/default.jpg') }}"
-                                     class="img-fluid rounded-start"
-                                     alt="{{ item.pizza.name }}">
-                            </div>
-                            <div class="col-8">
-                                <div class="card-body">
-                                    <h5 class="card-title">{{ item.pizza.name }}</h5>
-                                    <p class="card-text">
-                                        Quantité : <strong>{{ item.quantity }}</strong><br>
-                                        Prix unitaire : <strong>{{ item.pizza.prix }} €</strong><br>
-                                        Sous‑total : <strong>{{ item.total | number_format(2, '.', ',') }} €</strong>
-                                    </p>
-                                    <div class="btn-group">
-                                        <a href="{{ path('panier_add', {id: item.pizza.id}) }}" class="btn btn-sm btn-success">+</a>
-                                        <a href="{{ path('panier_decrease', {id: item.pizza.id}) }}" class="btn btn-sm btn-warning">-</a>
-                                        <a href="{{ path('panier_remove', {id: item.pizza.id}) }}" class="btn btn-sm btn-danger">Supprimer</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+    <section class="pizza-grid">
+        {% for item in items %}
+            <article class="pizza-card">
+                <img
+                    src="{{ asset(item.pizza.image ?: 'images/pizzas/default.jpg') }}"
+                    alt="{{ item.pizza.name }}"
+                    class="pizza-image"
+                >
+                <div class="pizza-content">
+                    <div class="pizza-header">
+                        <h3>{{ item.pizza.name }}</h3>
+                        <span class="pizza-price">{{ item.pizza.prix }} €</span>
+                    </div>
+                    <p class="pizza-description">{{ item.pizza.description }}</p>
+                    <div class="quantite-control">
+                        <a href="{{ path('panier_decrease', {id: item.pizza.id}) }}" class="btn-decrease">−</a>
+                        <span class="quantity">{{ item.quantity }}</span>
+                        <a href="{{ path('panier_index', {id: item.pizza.id}) }}" class="btn-increase">+</a>
+                        <a href="{{ path('panier_remove', {id: item.pizza.id}) }}" class="btn-remove">🗑️</a>
                     </div>
                 </div>
-            {% endfor %}
-        </div>
+            </article>
+        {% else %}
+            <p class="no-pizza">Votre panier est vide</p>
+        {% endfor %}
+    </section>
 
-        <div class="text-end my-4">
-            <h4>Total : <strong>{{ total | number_format(2, '.', ',') }} €</strong></h4>
-        </div>
-
-        <div class="d-flex justify-content-between">
-            <a href="{{ path('pizza_index') }}" class="btn btn-primary">Continuer mes achats</a>
-            <a href="{{ path('order_checkout') }}" class="btn btn-success">Passer à la commande</a>
-        </div>
+    {% if items|length > 0 %}
+        <div class="panier-total">
+            <p>Total : <strong>{{ total }} €</strong></p>
+            <a href="{{ path('order_checkout') }}" class="btn-order">Commander maintenant</a>
+            <p class="free-delivery">Livraison gratuite pour les commandes supérieures à 20€</p>
+    </div>
     {% endif %}
 </div>
 {% endblock %}
-
-

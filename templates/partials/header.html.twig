@@ -1,49 +1,20 @@
-<header class="app-header">
+<header class="main-header">
     <div class="header-container">
+        <a href="{{ path('pizza_index') }}" class="logo">
+            🍕 Pizza Express
+            <span>La meilleure pizza en ville</span>
+        </a>
 
-        <!-- Logo -->
-        <div class="logo">
-            <i class="fa-solid fa-pizza-slice"></i>
-            <span>Pizza Express</span>
-        </div>
-
-        <!-- Navigation -->
-        <nav class="main-nav">
+        <nav class="nav">
             <a href="{{ path('pizza_index') }}">Menu</a>
-            <a href="#">Promotions</a>
-            <a href="#">À propos</a>
-        </nav>
+            <a href="{{ path('panier_index') }}">Panier</a>
 
-        <a href="{{ path('app_home') }}">Menu</a>
-
-
-        <!-- User actions -->
-        <div class="user-actions">
-
-            <!-- Panier -->
-            <a href="{{ path('pizza_index') }}" class="cart">
-                <i class="fa-solid fa-cart-shopping"></i>
-                <span class="badge">2</span>
-            </a>
-
-            <!-- Profil -->
             {% if app.user %}
-                <div class="profile">
-                    <i class="fa-solid fa-user"></i>
-                    {{ app.user.email }}
-                </div>
+                <a href="{{ path('app_logout') }}" class="btn-outline">Déconnexion</a>
             {% else %}
-                <a href="{{ path('pizza_index') }}">
-                    <i class="fa-solid fa-user"></i> Connexion
-                </a>
+                <a href="{{ path('app_login') }}" class="btn-outline">Connexion</a>
             {% endif %}
-
-            <!-- Settings -->
-            <a href="{{ path('pizza_index') }}">
-                <i class="fa-solid fa-gear"></i>
-            </a>
-
-        </div>
-
+        </nav>
     </div>
 </header>
+

@@ -1,0 +1,98 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Paiement{% endblock %}
+
+{% block body %}
+<div class="checkout-container">
+
+    <a href="{{ path('panier_index') }}" class="back-link">
+        ← Retour au panier
+    </a>
+
+    <div class="checkout-grid">
+
+        {# ===== LEFT : FORM ===== #}
+        <form method="POST" action="{{ path('order') }}" class="checkout-form">
+
+            <h2>Méthode de paiement</h2>
+
+            <label>
+                <input type="radio" name="payment" checked>
+                Carte bancaire
+            </label>
+
+            <label>
+                <input type="radio" name="payment">
+                PayPal
+            </label>
+
+            <label>
+                <input type="radio" name="payment">
+                Apple Pay
+            </label>
+
+            <h2>Informations de paiement</h2>
+
+            <input type="text" name="card_number" placeholder="Numéro de carte" required>
+            <input type="text" name="card_name" placeholder="Nom sur la carte" required>
+
+            <div class="row">
+                <input type="text" name="expiry" placeholder="MM/AA" required>
+                <input type="text" name="cvv" placeholder="CVV" required>
+            </div>
+
+            <h2>Adresse de livraison</h2>
+
+            <input type="text" name="name" placeholder="Nom complet" required>
+            <input type="text" name="address" placeholder="Adresse" required>
+
+            <div class="row">
+                <input type="text" name="city" placeholder="Ville" required>
+                <input type="text" name="postal" placeholder="Code postal" required>
+            </div>
+
+            <input type="text" name="phone" placeholder="Téléphone" required>
+
+            <button type="submit" class="btn-pay">
+                Payer {{ total }} €
+            </button>
+
+            <p class="secure">🔒 Paiement sécurisé SSL</p>
+        </form>
+
+        {# ===== RIGHT : SUMMARY ===== #}
+        <aside class="checkout-summary">
+            <h3>Résumé de la commande</h3>
+
+            {% for item in items %}
+                <div class="summary-item">
+                    <span>
+                        {{ item.quantity }} × {{ item.pizza.name }}
+                    </span>
+                    <span>
+                        {{ item.pizza.prix * item.quantity }} €
+                    </span>
+                </div>
+            {% endfor %}
+
+            <hr>
+
+            <div class="summary-line">
+                <span>Sous-total</span>
+                <span>{{ total }} €</span>
+            </div>
+
+            <div class="summary-line">
+                <span>Livraison</span>
+                <span>3.50 €</span>
+            </div>
+
+            <div class="summary-total">
+                <strong>Total</strong>
+                <strong>{{ total + 3.5 }} €</strong>
+            </div>
+        </aside>
+
+    </div>
+</div>
+{% endblock %}

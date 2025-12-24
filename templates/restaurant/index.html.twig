@@ -1,0 +1,64 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Notre Restaurant{% endblock %}
+
+{% block body %}
+
+<div class="container">
+
+    <a href="/" style="color:#c62828; text-decoration:none;">← Retour</a>
+
+    <div class="top">
+
+        {# MAP #}
+        <div class="card map">
+            <h1>Notre Restaurant</h1>
+            <p>
+                Venez nous rendre visite pour déguster nos délicieuses pizzas
+                dans une ambiance chaleureuse.
+            </p>
+
+            <iframe
+                src="https://www.google.com/maps?q=15%20Boulevard%20Saint-Michel%20Paris&output=embed"
+                loading="lazy">
+            </iframe>
+
+            <a class="btn"
+               href="https://www.google.com/maps/dir/?api=1&destination=15+Boulevard+Saint-Michel+Paris"
+               target="_blank">
+                Obtenir l’itinéraire
+            </a>
+        </div>
+
+        {# CONTACTS #}
+        <div class="card info">
+            <h2>Coordonnées</h2>
+            <p>📍 15 Boulevard Saint-Michel, 75005 Paris</p>
+            <p>📞 +33 1 43 54 78 90</p>
+            <p>✉️ contact@pizzaexpress.fr</p>
+
+            <hr>
+
+            <h2>Horaires d’ouverture</h2>
+            <div class="hours">
+                <p><span>Lundi – Jeudi</span><span>11h00 – 23h00</span></p>
+                <p><span>Vendredi – Samedi</span><span>11h00 – 00h00</span></p>
+                <p><span>Dimanche</span><span>11h00 – 23h00</span></p>
+            </div>
+        </div>
+
+    </div>
+
+    {# AMBIANCE #}
+    <div class="bottom">
+        <div class="card">
+            <h2>Notre Ambiance</h2>
+            <p>
+                Un cadre chaleureux et convivial pour profiter de nos pizzas
+                artisanales préparées avec des ingrédients frais et locaux.
+            </p>
+        </div>
+    </div>
+
+</div>
+{% endblock %}
